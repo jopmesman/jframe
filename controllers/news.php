@@ -195,7 +195,7 @@ class News_Controller {
           $message = "Newsitem is saved. %s";
           $extramessage = '';
           if ($action == 'add' and $loggedin == FALSE){
-            $extramessage = 'The ddmin of the site will publish it as soon as possible.';
+            $extramessage = 'The admin of the site will publish it as soon as possible.';
           }
           setSuccessMessage(sprintf($message, $extramessage));
           gotoPage('news');
@@ -262,9 +262,25 @@ class News_Controller {
    * @param string $action
    * @param integer $news_id
    *
-   * 
+   *
    */
   public function js_pubunpubNewsItem($action, $news_id) {
 
+  }
+
+  /**
+   * Function to generate blocks
+   */
+  public function newsBlock() {
+    $usercontroller = new User_Controller();
+    $newscontroller = new News_controller();
+
+    $blockView = new View_Model('newsblock');
+    if ($usercontroller->userLoggedin()) {
+      $blockView->assign('loggedin', TRUE);
+      $blockView->assign('unseen', $newscontroller->countUnseenNewsItems());
+    }
+
+    return $blockView->render(FALSE);
   }
 }

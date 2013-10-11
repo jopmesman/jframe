@@ -17,16 +17,30 @@ class Blocks_Controller{
    */
   public function CreateBlocks() {
     $return = array();
-    $usercontroller = new User_Controller();
-    $newscontroller = new News_controller();
+    $blocks = $this->blocksConfig();
 
-    $blockView = new View_Model('newsblock');
-    if ($usercontroller->userLoggedin()) {
-      $blockView->assign('loggedin', TRUE);
-      $blockView->assign('unseen', $newscontroller->countUnseenNewsItems());
+    foreach ($blocks as $block) {
+      $blockController = new $block['controller']();
+      $return[$block['region']][] = call_user_method($block['function'], $blockController);
     }
-    $return[] = $blockView->render(FALSE);
 
     return $return;
+  }
+
+  private function blocksConfig() {
+    return array(
+      array(
+        'title' => 'News',
+        'controller' => 'News_Controller',
+        'function' => 'newsBlock',
+        'region' => 'left',
+      ),
+      array(
+        'title' => 'User',
+        'controller' => 'User_controller',
+        'function' => 'createLoginBlock',
+        'region' => 'left',
+      )
+    );
   }
 }

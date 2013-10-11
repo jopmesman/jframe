@@ -13,14 +13,11 @@
       </div>
       <div id="main-wrapper">
         <div id="blocks-wrapper">
-          <?php if (count($blocks) > 0) { ?>
-          <?php foreach ($blocks as $block) { ?>
+          <?php if (count($blocks['left']) > 0) { ?>
+          <?php foreach ($blocks['left'] as $block) { ?>
             <?php print $block;?>
           <?php } ?>
           <?php } ?>
-          <div id="login-block">
-            <?php print $userblock; ?>
-          </div>
         </div>
         <div id="content-wrapper">
           <?php if (isset($messageserror)) { ?>
@@ -55,7 +52,14 @@
       <div id="footer-wrapper">
         <div id="footer">
           <hr />
-          &copy; <?php print date("Y"); ?>
+          <?php if (count($blocks['footer']) > 0) {?>
+          <div id="footer-blocks">
+            <?php foreach ($blocks['footer'] as $fblock) { ?>
+
+            <?php } ?>
+          </div>
+          <?php } ?>
+          <span>&copy; <?php print date("Y"); ?></span>
         </div>
       </div>
     </div>

@@ -43,19 +43,18 @@ function __autoload($className) {
   }
 }
 
-//Create some objects
-$userblockController = new User_Controller();
 
 //Add some variables to use in the main template
 $data = array();
 
 try {
   $routing = new Routing_controller;
+  $userController = new User_controller;
   //Init the routing
   $route = $routing->initRouting($_GET['page']);
 
   //Does the user have to be loggedin?
-  if ($route['loggedin'] and $userblockController->userLoggedIn() == FALSE) {
+  if ($route['loggedin'] and $userController->userLoggedIn() == FALSE) {
     //Yes and the user is not!
     setErrorMessage("You are not allowed here.");
     gotoPage('home');
@@ -93,8 +92,6 @@ try {
 }
 
 $view = new View_Model(MAIN_TEMPLATE);
-
-$data['userblock'] = $userblockController->createLoginBlock();
 
 $blocksController = new Blocks_controller();
 $data['blocks'] = $blocksController->CreateBlocks();
