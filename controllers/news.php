@@ -170,6 +170,7 @@ class News_Controller {
         break;
       default:
         setErrorMessage('Action is not allowed');
+        //STOP and go to home!
         gotoPage('home');
         break;
     }
@@ -194,7 +195,7 @@ class News_Controller {
           $message = "Newsitem is saved. %s";
           $extramessage = '';
           if ($action == 'add' and $loggedin == FALSE){
-            $extramessage = 'Admin will publish it.';
+            $extramessage = 'The ddmin of the site will publish it as soon as possible.';
           }
           setSuccessMessage(sprintf($message, $extramessage));
           gotoPage('news');
@@ -255,7 +256,15 @@ class News_Controller {
     }
   }
 
+  /**
+   * Try to add some json.
+   *
+   * @param string $action
+   * @param integer $news_id
+   *
+   * 
+   */
   public function js_pubunpubNewsItem($action, $news_id) {
-    
+
   }
 }

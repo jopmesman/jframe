@@ -63,7 +63,21 @@ try {
   else{
     //Make an instance of the defined controller
     $controller = new $route['controller'];
-    $data['content'] = call_user_method_array($route['function'], $controller, $route['variables']);
+    $resultOfController = call_user_method_array($route['function'], $controller, $route['variables']);
+
+    //what's the type of return?
+    switch ($route['returntype']) {
+      case 'html':
+        //add content and let the flow go
+        $data['content'] = $resultOfController;
+        break;
+      case 'json':
+        
+        break;
+    }
+  }
+
+
     //Set the title
     if(isset($route['title'])) {
       $data['title'] = $route['title'];

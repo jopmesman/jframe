@@ -3,8 +3,7 @@
  * @file
  * Handles the view functionality
  */
-class View_Model
-{
+class View_Model {
 	/**
 	 * Holds variables assigned to template
 	 */
@@ -18,13 +17,11 @@ class View_Model
 	/**
 	 * Accept a template to load
 	 */
-	public function __construct($template)
-	{
+	public function __construct($template) {
 		//compose file name
 		$file = SERVER_ROOT . '/views/' . strtolower($template) . '.php';
 
-		if (file_exists($file))
-		{
+		if (file_exists($file)) {
 			/**
 			 * trigger render to include file when this model is destroyed
 			 * if we render it now, we wouldn't be able to assign variables
@@ -40,8 +37,7 @@ class View_Model
 	 * @param $variable
 	 * @param $value
 	 */
-	public function assign($variable , $value)
-	{
+	public function assign($variable , $value) {
 		$this->data[$variable] = $value;
 	}
 
@@ -52,11 +48,9 @@ class View_Model
 	 * @param $direct_output Set to any non-TRUE value to have the
 	 * output returned rather than displayed directly.
 	 */
-	public function render($direct_output = TRUE)
-	{
+	public function render($direct_output = TRUE) {
 		// Turn output buffering on, capturing all output
-		if ($direct_output !== TRUE)
-		{
+		if ($direct_output !== TRUE) {
 			ob_start();
 		}
 
@@ -73,8 +67,7 @@ class View_Model
 		include($this->render);
 
 		// Get the contents of the buffer and return it
-		if ($direct_output !== TRUE)
-		{
+		if ($direct_output !== TRUE) {
 			return ob_get_clean();
 		}
 	}
