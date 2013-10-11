@@ -3,6 +3,7 @@
   <div id="user_login_block_loggedin">
     <h5>Welcome <?php print htmlspecialchars($username); ?></h5>
     <ul class="nav nav-list" id="user_loggedin_link_list">
+      <li><a href="?page=user/edit/<?php print $user_id; ?>">Edit user</a></li>
       <li><a href="?page=user/logout">Logout</a>
     </ul>
   </div>

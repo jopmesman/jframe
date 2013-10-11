@@ -124,9 +124,17 @@ class Routing_controller {
         'loggedin' => TRUE,
         'variables' => array(
           'logout'
-        )
+        ),
       ),
-
+      'user/edit/%' => array(
+        'title' => 'Edit user',
+        'controller' => 'User_Controller',
+        'function' => 'editUser',
+        'loggedin' => TRUE,
+        'variables' => array(
+          2,
+        ),
+      ),
     );
   }
 

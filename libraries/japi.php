@@ -81,3 +81,13 @@ function userLoggedIn() {
     return $cache;
   }
 }
+
+/**
+ * Get the user
+ */
+function getUser() {
+  if (userLoggedIn()) {
+    return $_SESSION[SESSNAME]['user'];
+  }
+  return array('user_id' => 0);
+}

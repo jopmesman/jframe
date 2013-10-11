@@ -67,6 +67,7 @@ class User_controller {
       //the user is logged in
       $data['loggedin'] = TRUE;
       $data['username'] = $user['user_name'];
+      $data['user_id'] = $user['user_id'];
     }
     else {
       //Did the clicked the login button?
@@ -115,5 +116,19 @@ class User_controller {
       $chache = FALSE;
       return FALSE;
     }
+  }
+
+  public function editUser($user_id) {
+    $user = getUser();
+    if (userLoggedIn() and $user_id == $user['user_id']) {
+      $userEditView = new View_Model('useredit');
+      $userEditView->assign('page', 'user/edit/' . $user_id);
+    }
+    else{
+      setErrorMessage('You are not allowed to acces this page');
+      gotoPage('home');
+    }
+
+    return $userEditView->render(FALSE);
   }
 }
