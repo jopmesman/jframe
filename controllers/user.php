@@ -102,9 +102,18 @@ class User_controller {
    * @return boolean
    */
   public function userLoggedIn() {
-    if (isset($_SESSION[SESSNAME]['user']['user_id'])) {
-      return $_SESSION[SESSNAME]['user'];
+    static $cache = NULL;
+
+    if (!is_null($cache)) {
+      return $cache;
     }
-    return FALSE;
+    else{
+      if (isset($_SESSION[SESSNAME]['user']['user_id'])) {
+        $cache = $_SESSION[SESSNAME]['user'];
+        return $_SESSION[SESSNAME]['user'];
+      }
+      $chache = FALSE;
+      return FALSE;
+    }
   }
 }

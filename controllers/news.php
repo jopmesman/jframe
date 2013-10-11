@@ -41,15 +41,16 @@ class News_Controller {
    * @return string Generated newsitem list page
    */
   public function main($news_id = NULL) {
-    //we are going to watch al newsitems
-    $content = $this->showAllNews($news_id);
-
     //Instanciate the view to create a nice view
     $newsview = new View_model('news');
-    $newsview->assign('content', $content);
-    $return = $newsview->render(FALSE);
 
-    return $return;
+    //we are going to watch al newsitems
+    if (userLoggedIn()){
+      $newsview->assign('unseen', $this->countUnseenNewsItems());
+    }
+    $newsview->assign('content', $this->showAllNews($news_id));
+
+    return $newsview->render(FALSE);
   }
 
   /**
@@ -65,20 +66,21 @@ class News_Controller {
     $newsitemview = new View_model('newsitem');
 
     $published = TRUE;
-    if ($this->usercontroller->userLoggedIn()){
+    if (userLoggedIn()){
       $published = FALSE;
       $loggedin = TRUE;
+      $newsitemview->assign('loggedin', $loggedin);
     }
     $newsitems = $this->newsModel->getAllNews($published, $news_id);
 
     if($loggedin) {
+      $newsitemview->assign('unseen', $this->countUnseenNewsItems());
       //If the user is logged in all items will be updated to seen
       $this->newsModel->newsSetAllSeen();
     }
 
     //Render if there are more then zero items
     if (count($newsitems) > 0) {
-      $newsitemview->assign('loggedin', $loggedin);
       $newsitemview->assign('news', $newsitems);
       $return = $newsitemview->render(FALSE);
     }
@@ -130,7 +132,7 @@ class News_Controller {
     $newsview = new View_Model($template);
 
     //Assing an loggedin variable to the view
-    if($this->usercontroller->userLoggedIn()) {
+    if(userLoggedIn()) {
       $loggedin = TRUE;
       $newsview->assign('loggedin', $loggedin);
     }
@@ -276,7 +278,7 @@ class News_Controller {
     $newscontroller = new News_controller();
 
     $blockView = new View_Model('newsblock');
-    if ($usercontroller->userLoggedin()) {
+    if (userLoggedIn()) {
       $blockView->assign('loggedin', TRUE);
       $blockView->assign('unseen', $newscontroller->countUnseenNewsItems());
     }
