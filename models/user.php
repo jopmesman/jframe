@@ -6,8 +6,7 @@
 /**
  *Class User_model
  */
-class User_Model {
-  private $db = NULL;
+class User_Model extends Model_Model {
 
   public function __construct() {
     //let's make a connection

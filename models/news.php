@@ -6,8 +6,7 @@
 /**
  * Class News_model
  */
-class News_Model {
-  private $db = NULL;
+class News_Model extends Model_Model {
   private $usercontroller = NULL;
 
   /**

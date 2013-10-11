@@ -14,4 +14,4 @@ require_once('libraries/japi.php');
 /**
  * Include the router and let the magic happens
  */
-require_once(SERVER_ROOT . '/controllers/' . 'router.php');
+require_once(SERVER_ROOT . 'controllers/' . 'router.php');
