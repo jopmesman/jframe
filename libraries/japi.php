@@ -67,3 +67,17 @@ function getFormid() {
   return $_SESSION[SESSNAME]['formid'];
 }
 
+/**
+ * Determine if the user is loggedin
+ */
+function userLoggedIn() {
+  static $cache = NULL;
+  if (!is_null($cache)) {
+    return $cache;
+  }
+  else{
+    $userController = new User_Controller();
+    $cache = $userController->userLoggedIn();
+    return $cache;
+  }
+}
