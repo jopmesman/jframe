@@ -54,7 +54,7 @@ try {
   $route = $routing->initRouting($_GET['page']);
 
   //Does the user have to be loggedin?
-  if ($route['loggedin'] and userLoggedIn() == FALSE) {
+  if ($route['loggedin'] and $userController->userLoggedIn() == FALSE) {
     //Yes and the user is not!
     setErrorMessage("You are not allowed here.");
     gotoPage('home');
