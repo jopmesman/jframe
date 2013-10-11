@@ -45,7 +45,7 @@ class User_controller {
       switch ($actionoption) {
         case 'logout':
           //Unset the SESSION
-          unset($_SESSION[SESSNAME]);
+          unset($_SESSION[SESSNAME]['user']);
 
           gotoPage('home');
           break;
@@ -63,9 +63,10 @@ class User_controller {
     $data['loggedin'] = FALSE;
 
     //Check if the  user is already logged in
-    if ($this->userLoggedin()) {
+    if ($user = $this->userLoggedin()) {
       //the user is logged in
       $data['loggedin'] = TRUE;
+      $data['username'] = $user['user_name'];
     }
     else {
       //Did the clicked the login button?
@@ -76,10 +77,7 @@ class User_controller {
 
         //Check if the user could be loaded.
         if ($user) {
-          //user is logged in succesful
-          $data['loggedin'] = TRUE;
-
-          $_SESSION[SESSNAME]['userid'] = $user['user_id'];
+          $_SESSION[SESSNAME]['user'] = $user;
           setSuccessMessage('Successfully logged in');
           gotoPage($_GET['page']);
         }
@@ -104,8 +102,8 @@ class User_controller {
    * @return boolean
    */
   public function userLoggedIn() {
-    if (isset($_SESSION[SESSNAME]['userid'])) {
-      return TRUE;
+    if (isset($_SESSION[SESSNAME]['user']['user_id'])) {
+      return $_SESSION[SESSNAME]['user'];
     }
     return FALSE;
   }
