@@ -72,17 +72,16 @@ try {
         $data['content'] = $resultOfController;
         break;
       case 'json':
-        
+
         break;
     }
   }
 
-
-    //Set the title
-    if(isset($route['title'])) {
-      $data['title'] = $route['title'];
-    }
+  //Set the title
+  if(isset($route['title'])) {
+    $data['title'] = $route['title'];
   }
+
 
 } catch (Exception $exc) {
   //Add a title
