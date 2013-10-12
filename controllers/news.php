@@ -58,6 +58,15 @@ class News_Controller {
       $loggedin = TRUE;
       $newsitemview->assign('loggedin', $loggedin);
     }
+
+    //For security we check if the input is correct.
+    //If not. Make it Null. All Newsitems wil be returned.
+    if (!is_null($news_id)) {
+      $news_id = (int) $news_id;
+      if ($news_id == 0) {
+        $news_id = NULL;
+      }
+    }
     $newsitems = $this->newsModel->getAllNews($published, $news_id);
 
     if($loggedin) {
@@ -90,9 +99,17 @@ class News_Controller {
    * @param integer $news_id
    */
   public function pubunpubNewsItem($action, $news_id = NULL) {
-    $this->newsModel->pubunpub($action, $news_id);
-    $message = sprintf('Newsitems is %s', ($action == 'pub') ? 'published' : 'unpublished');
-    setSuccessMessage($message);
+    //For security we check if the input is correct.
+    //If not. Make it Null. All Newsitems wil be returned.
+    if (!is_null($news_id)) {
+      $news_id = (int) $news_id;
+      if ($news_id > 0) {
+        $this->newsModel->pubunpub($action, $news_id);
+        $message = sprintf('Newsitems is %s', ($action == 'pub') ? 'published' : 'unpublished');
+        setSuccessMessage($message);
+      }
+    }
+
     gotoPage('news');
   }
 
@@ -101,8 +118,16 @@ class News_Controller {
    * @param integer $news_id
    */
   public function deleteNewsItem($news_id) {
-    $this->newsModel->deleteNewsItem($news_id);
-    setSuccessMessage('Newsitem deleted');
+    //For security we check if the input is correct.
+    //If not. Make it Null. All Newsitems wil be returned.
+    if (!is_null($news_id)) {
+      $news_id = (int) $news_id;
+      if ($news_id > 0) {
+        $this->newsModel->deleteNewsItem($news_id);
+        setSuccessMessage('Newsitem deleted');
+      }
+    }
+
     gotoPage('news');
   }
 
