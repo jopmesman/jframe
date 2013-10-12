@@ -193,6 +193,7 @@ class Routing_controller {
   private function createOptions($page) {
     $parts = explode('/', $page);
 
+    //Bit used of the drupal menu.inc.
     $number_parts = count($parts);
     $length =  $number_parts - 1;
     $end = (1 << $number_parts) - 1;
