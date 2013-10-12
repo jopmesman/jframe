@@ -191,20 +191,40 @@ class Routing_controller {
    * @return array
    */
   private function createOptions($page) {
-    $return = array($page);
-    $explode = explode('/', $page);
+    $parts = explode('/', $page);
 
-    $count = count($explode);
+    $number_parts = count($parts);
+    $length =  $number_parts - 1;
+    $end = (1 << $number_parts) - 1;
 
-    //First replace the item with a % and create an option
-    //Then remove the item and add it also to the options array
-    for($i = $count - 1; $i >= 1; $i-- ) {
-      $explode[$i] = '%';
-      $return[] = implode('/', $explode);
-      unset($explode[$i]);
-      if(count($explode) != 0) {
-        $return[] = implode('/', $explode);
+    $masks = range(511, 1);
+    // Only examine patterns that actually exist as router items (the masks).
+    foreach ($masks as $i) {
+      if ($i > $end) {
+        // Only look at masks that are not longer than the path of interest.
+        continue;
       }
+      elseif ($i < (1 << $length)) {
+        // We have exhausted the masks of a given length, so decrease the length.
+        --$length;
+      }
+      $current = '';
+      for ($j = $length; $j >= 0; $j--) {
+        // Check the bit on the $j offset.
+        if ($i & (1 << $j)) {
+          // Bit one means the original value.
+          $current .= $parts[$length - $j];
+        }
+        else {
+          // Bit zero means means wildcard.
+          $current .= '%';
+        }
+        // Unless we are at offset 0, add a slash.
+        if ($j) {
+          $current .= '/';
+        }
+      }
+      $return[] = $current;
     }
 
     return $return;
