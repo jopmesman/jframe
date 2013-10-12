@@ -4,6 +4,20 @@
  */
 
 /**
+ * Table definition
+ *
+ * CREATE TABLE IF NOT EXISTS `news` (
+ * `news_id` int(11) NOT NULL AUTO_INCREMENT,
+ * `news_title` varchar(255) NOT NULL,
+ * `news_message` text NOT NULL,
+ * `news_published` tinyint(4) NOT NULL,
+ * `news_admin_seen` tinyint(4) NOT NULL,
+ * `news_date` timestamp NOT NULL,
+ * PRIMARY KEY (`news_id`)
+ * ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+ */
+
+/**
  * Class News_model
  */
 class News_Model extends Model_Model {

@@ -4,6 +4,30 @@
  */
 
 /**
+ * user table
+ * CREATE TABLE IF NOT EXISTS `user` (
+ * `user_id` int(11) NOT NULL AUTO_INCREMENT,
+ * `user_name` varchar(255) NOT NULL,
+ * `user_password` varchar(255) NOT NULL,
+ * `user_salt` varchar(255) NOT NULL,
+ * PRIMARY KEY (`user_id`)
+ * ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+ *
+ * INSERT INTO  `jframe`.`user` (
+ * `user_id` ,
+ * `user_name` ,
+ * `user_password` ,
+ * `user_salt`
+ * )
+ * VALUES (
+ * NULL ,  'admin',  'd6c811c7dd8c6945e85f73f418b539e6',  'AYN'
+ * );
+ *
+ * Now you can use the login admin/admin
+ */
+
+
+/**
  *Class User_model
  */
 class User_Model extends Model_Model {
