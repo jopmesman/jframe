@@ -198,7 +198,7 @@ class Routing_controller {
     $length =  $number_parts - 1;
     $end = (1 << $number_parts) - 1;
 
-    $masks = range(511, 1);
+    $masks = range(10, 1);
     // Only examine patterns that actually exist as router items (the masks).
     foreach ($masks as $i) {
       if ($i > $end) {
