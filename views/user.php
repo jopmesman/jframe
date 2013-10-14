@@ -8,6 +8,7 @@
     </ul>
   </div>
 <?php } else { ?>
+  <h5><?php print $title; ?></h5>
   <form class="navbar-form pull-left" id="user_login_form" action="<?php print $_SERVER['PHP_SELF']; ?>" method="POST">
     <input type="text" name="username" class="span2" placeholder="username" />
     <input type="password" name="password" class="span2" placeholder="password" />

@@ -285,7 +285,7 @@ class News_Controller {
   /**
    * Function to generate blocks
    */
-  public function newsBlock() {
+  public function newsBlock($config) {
     $usercontroller = new User_Controller();
     $newscontroller = new News_controller();
 
@@ -294,6 +294,9 @@ class News_Controller {
       $blockView->assign('loggedin', TRUE);
       $blockView->assign('unseen', $newscontroller->countUnseenNewsItems());
     }
+
+    //Add aloso the title
+    $blockView->assign('title', $config['title']);
 
     return $blockView->render(FALSE);
   }

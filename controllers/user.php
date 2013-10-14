@@ -36,7 +36,7 @@ class User_controller {
    * If a user clicked the login button it will also be validated
    * @return generated html
    */
-  public function createLoginBlock() {
+  public function createLoginBlock($config) {
     //check wether a user is loggin
     $data['loggedin'] = FALSE;
 
@@ -66,6 +66,8 @@ class User_controller {
         }
       }
     }
+
+    $data['title'] = $config['title'];
 
     //Generate the html
     $userview = new View_Model($this->template);

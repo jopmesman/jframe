@@ -1,5 +1,5 @@
           <div id="news-block">
-            <h5>News</h5>
+            <h5><?php print $title; ?></h5>
             <div id="news-nav-block">
               <ul class="nav nav-list" id="news_nav_link_list">
                 <li>

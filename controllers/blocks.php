@@ -21,7 +21,7 @@ class Blocks_Controller{
 
     foreach ($blocks as $block) {
       $blockController = new $block['controller']();
-      $return[$block['region']][] = call_user_method($block['function'], $blockController);
+      $return[$block['region']][] = call_user_method($block['function'], $blockController, $block);
     }
 
     return $return;
@@ -36,7 +36,7 @@ class Blocks_Controller{
         'region' => 'left',
       ),
       array(
-        'title' => 'User',
+        'title' => 'Login',
         'controller' => 'User_controller',
         'function' => 'createLoginBlock',
         'region' => 'left',
