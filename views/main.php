@@ -15,7 +15,7 @@
         <div id="blocks-wrapper">
           <?php if (count($blocks['left']) > 0) { ?>
           <?php foreach ($blocks['left'] as $block) { ?>
-            <?php print $block;?>
+            <?php print $block['content'];?>
           <?php } ?>
           <?php } ?>
         </div>

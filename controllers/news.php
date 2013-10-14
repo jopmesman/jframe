@@ -194,7 +194,12 @@ class News_Controller {
     if (isset($_POST['addedit_news_submit']) and
         $_POST['addedit_news_submit'] == 'Save' ) {
       //User clicked
-      if ($action == 'add' or ($action == 'edit'and $news_id == getFormid())){
+      if ($action == 'add' or ($action == 'edit'and
+          //In the loading section of the edit page we've set an formitem
+          //Let's check if they match
+          //If they do, do the validation
+          //If they don't. Stopn everything concerning the posting of an newsitem and give an error
+          $news_id == getFormid())) {
         //eventualy do validation
         if ($this->validateNewsForm($_POST) === FALSE ) {
           //Validation fails
@@ -216,7 +221,8 @@ class News_Controller {
         }
       }
       else{
-       setErrorMessage('You are not allowed to do this action22');
+        //Set the error message
+        setErrorMessage('You are not allowed to do this action.');
       }
     }
     else{
