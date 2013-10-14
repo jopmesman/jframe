@@ -8,7 +8,7 @@
  * Class User_controller
  */
 class User_controller {
-  private $template = 'user';
+  private $templateBlock = 'user_block';
   private $actionoptions = array(
     'logout',
   );
@@ -70,7 +70,7 @@ class User_controller {
     $data['title'] = $config['title'];
 
     //Generate the html
-    $userview = new View_Model($this->template);
+    $userview = new View_Model($this->templateBlock);
     foreach ($data as $key => $value) {
       $userview->assign($key, $value);
     }
