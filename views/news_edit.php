@@ -1,3 +1,4 @@
+<script src="views/js/google_maps.js"></script>
 <div id="news_edit_form_wrapper">
   <form action="<?php print $_SERVER['PHP_SELF']; ?>?page=<?php print $page; ?>" method="POST" id="addedit_news_form">
     <div id="addedit_news_form_title">
@@ -18,8 +19,12 @@
         </select>
       </div>
     <?php } ?>
+    <div id="news_google_maps">
+      <div id="map-canvas" style="width: 500px; height: 300px"></div>
+    </div>
     <div id="addedit_news_form_submit">
       <input type="submit" value="Save" name="addedit_news_submit" />
     </div>
   </form>
 </div>
+<script>window.onload = loadGoogleMapsScript('<?php print MAPSAPIKEY; ?>');</script>

@@ -1,3 +1,5 @@
+<script src="views/js/google_maps.js"></script>
+<?php $count = count($news);?>
 <?php foreach ($news as $newsitem) { ?>
 <div>
   <div class="newsitem_title">
@@ -34,5 +36,11 @@
     <?php } ?>
   </div>
 </div>
+<?php if ($count == 1) { //we have 1 newsitem. So the user is viewing the details ?>
+<script>window.onload = loadGoogleMapsScript('<?php print MAPSAPIKEY; ?>');</script>
+    <div id="news_google_maps">
+      <div id="map-canvas" style="width: 700px; height: 300px"></div>
+    </div>
+<?php } ?>
 <hr />
 <?php } ?>

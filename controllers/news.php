@@ -11,14 +11,12 @@
  */
 class News_Controller {
   private $newsModel;
-  private $usercontroller;
 
   /**
    * Constructor
    */
   public function __construct() {
     $this->newsModel = new News_model;
-    $this->usercontroller = new User_controller;
   }
 
   /**
@@ -50,7 +48,7 @@ class News_Controller {
   private function showAllNews($news_id = NULL) {
     //Standard output
     $return = 'No news Found';
-    $newsitemview = new View_model('newsitem');
+    $newsitemview = new View_model('news_item');
 
     $published = TRUE;
     if (userLoggedIn()){
@@ -251,7 +249,7 @@ class News_Controller {
     }
 
     //Just checking if somebody is try to hack me.
-    if ($this->usercontroller->userLoggedIn()) {
+    if (userLoggedIn()) {
       if ($post['news_pubunpub'] !== '0' and $post['news_pubunpub'] !== '1') {
         setErrorMessage('Unknown input');
         $return = FALSE;
@@ -292,10 +290,9 @@ class News_Controller {
    * Function to generate blocks
    */
   public function newsBlock($config) {
-    $usercontroller = new User_Controller();
     $newscontroller = new News_controller();
 
-    $blockView = new View_Model('newsblock');
+    $blockView = new View_Model('news_block');
     if (userLoggedIn()) {
       $blockView->assign('loggedin', TRUE);
       $blockView->assign('unseen', $newscontroller->countUnseenNewsItems());

@@ -8,7 +8,6 @@
  * Class User_controller
  */
 class User_controller {
-  private $templateBlock = 'user_block';
   private $actionoptions = array(
     'logout',
   );
@@ -70,7 +69,7 @@ class User_controller {
     $data['title'] = $config['title'];
 
     //Generate the html
-    $userview = new View_Model($this->templateBlock);
+    $userview = new View_Model('user_block');
     foreach ($data as $key => $value) {
       $userview->assign($key, $value);
     }
@@ -101,7 +100,7 @@ class User_controller {
   public function editUser($user_id) {
     $user = getUser();
     if (userLoggedIn() and $user_id == $user['user_id']) {
-      $userEditView = new View_Model('useredit');
+      $userEditView = new View_Model('user_edit');
       $userEditView->assign('page', 'user/edit/' . $user_id);
     }
     else{
